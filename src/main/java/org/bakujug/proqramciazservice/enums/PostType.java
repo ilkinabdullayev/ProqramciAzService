@@ -8,7 +8,7 @@ package org.bakujug.proqramciazservice.enums;
 
 /**
  *
- * @author Administrator
+ * @author Ilkin Abdullayev
  */
 public enum PostType {
     POST,ATTACHMENT,REVISION,PAGE

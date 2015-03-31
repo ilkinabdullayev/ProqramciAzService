@@ -10,9 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.bakujug.proqramciazservice.enums.UserRole;
+import org.bakujug.proqramciazservice.enums.UserRoleType;
 
 /**
  *
@@ -35,6 +36,7 @@ public class UserMeta implements Serializable {
     @Column(name = "DISPLAY_NAME", length = 100)
     private String displayname;
 
+    @Lob
     @Column(name = "DESCRIPTION")
     private String description;
 

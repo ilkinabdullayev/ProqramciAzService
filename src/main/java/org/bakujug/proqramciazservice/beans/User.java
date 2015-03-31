@@ -15,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.bakujug.proqramciazservice.enums.UserRole;
+import org.bakujug.proqramciazservice.enums.UserRoleType;
 
 /**
  *
@@ -45,7 +45,7 @@ public class User implements Serializable {
     
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_STATUS",nullable = false,length = 20)
-    private UserRole userStatus;
+    private UserRoleType userStatus;
     
     @Column(name = "ACTIVE",nullable = false)
     private boolean active;
@@ -97,11 +97,11 @@ public class User implements Serializable {
         this.deRegistrationDate = deRegistrationDate;
     }
 
-    public UserRole getUserStatus() {
+    public UserRoleType getUserStatus() {
         return userStatus;
     }
 
-    public void setUserStatus(UserRole userStatus) {
+    public void setUserStatus(UserRoleType userStatus) {
         this.userStatus = userStatus;
     }
 

@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.bakujug.proqramciazservice.enums;
 
 /**
  *
- * @author Administrator
+ * @author Ilkin Abdullayev
  */
-public enum UserRole {
-    SUBSCRIBER,AUTHOR,CONTRIBUTOR,EDITOR,ADMINISTRATOR 
+public enum CommentStatus {
+    TRASH, POST_TRASHED, APPROVED, PENDING, SPAM
 }

@@ -6,12 +6,17 @@
 package org.bakujug.proqramciazservice.beans;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.bakujug.proqramciazservice.enums.TaxonomyType;
 
@@ -34,6 +39,15 @@ public class Taxonomy implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "TAXONOMY_TYPE", nullable = false, length = 20)
     private TaxonomyType taxonomyType;
+
+    @ManyToMany(targetEntity = Post.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "paz.PAZ_TAXONOMY_RELATIONSHIPS",
+            joinColumns = {
+                @JoinColumn(name = "TAX_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "POST_ID", referencedColumnName = "ID")}
+    )
+    private List<Post> posts;
 
     public Taxonomy() {
     }
@@ -66,6 +80,15 @@ public class Taxonomy implements Serializable {
         this.taxonomyType = taxonomyType;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }    
+    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -91,6 +114,6 @@ public class Taxonomy implements Serializable {
     @Override
     public String toString() {
         return "Taxonomy{" + "id=" + id + ", name=" + name + ", taxonomyType=" + taxonomyType + '}';
-    }    
-    
+    }
+
 }
