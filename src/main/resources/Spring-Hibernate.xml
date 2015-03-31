@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">    
+   
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/paz" />
+        <property name="username" value="paz" />
+        <property name="password" value="paz" />
+    </bean>
+    
+    <bean id="transactionManager"  class="org.springframework.orm.hibernate3.HibernateTransactionManager"> 
+        <property name="sessionFactory" ref="sessionFactory" /> 
+    </bean>  
+    
+    <bean id="sessionFactory"  class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> 
+        <property name="dataSource" ref="dataSource" />
+        <property name="annotatedClasses">
+            <list>
+                <value>org.bakujug.proqramciazservice.beans.Comment</value>
+                <value>org.bakujug.proqramciazservice.beans.Post</value>                
+                <value>org.bakujug.proqramciazservice.beans.Taxonomy</value>                
+                <value>org.bakujug.proqramciazservice.beans.User</value>                
+                <value>org.bakujug.proqramciazservice.beans.UserMeta</value>                
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.format_sql=true
+                hibernate.show_sql=true
+                hibernate.hbm2ddl.auto=create-drop
+            </value>
+        </property>
+    </bean>
+   
+</beans>
