@@ -5,7 +5,10 @@
  */
 package org.bakujug.proqramciazservice.controller;
 
+import org.bakujug.proqramciazservice.beans.Taxonomy;
 import org.bakujug.proqramciazservice.dao.PostService;
+import org.bakujug.proqramciazservice.dao.TaxonomyService;
+import org.bakujug.proqramciazservice.enums.TaxonomyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -25,23 +28,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TestController {
     
     @Autowired
-    private PostService postService;
+    private TaxonomyService taxonomyService;
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String printWelcome(@PathVariable String name, ModelMap model) {
+        
+        Taxonomy taxonomy=new Taxonomy();
+        taxonomy.setName("Java");
+        taxonomy.setTaxonomyType(TaxonomyType.CATEGORY);
+        
+        taxonomyService.save(taxonomy);
+       
 
-        //ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml", "Spring-Hibernate.xml");
-
-        model.addAttribute("message", name);
+        model.addAttribute("message", taxonomy);
         return "response";
     }
-
-//    public PostService getPostService() {
-//        return postService;
-//    }
-//
-//    public void setPostService(PostService postService) {
-//        this.postService = postService;
-//    }    
-
+    
 }
