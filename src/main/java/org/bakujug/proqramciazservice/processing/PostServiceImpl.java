@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Administrator
+ * @author Ilkin Abdullayev
  */
-@Component("abc")
+@Component
 public class PostServiceImpl implements PostService {
 
     @Autowired
@@ -25,7 +25,7 @@ public class PostServiceImpl implements PostService {
 
     @Override   
     public void save(Post post) {
-       System.out.println("sagol");
+       getCurrentSession().save(post);
     }   
 
     private Session getCurrentSession() {

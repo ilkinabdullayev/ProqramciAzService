@@ -6,12 +6,17 @@
 
 package org.bakujug.proqramciazservice.dao;
 
+import java.util.List;
 import org.bakujug.proqramciazservice.beans.Taxonomy;
+import org.bakujug.proqramciazservice.enums.TaxonomyType;
 
 /**
  *
  * @author Administrator
  */
 public interface TaxonomyService {
+    public Taxonomy getTaxonomy(int id);
+    public List<Taxonomy> getListTaxonomy(TaxonomyType taxonomyType);
+    public List<Taxonomy> getAllTaxonomy();
     public void save(Taxonomy taxonomy);
 }

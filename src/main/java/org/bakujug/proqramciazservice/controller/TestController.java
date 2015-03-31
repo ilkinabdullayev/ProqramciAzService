@@ -18,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -30,18 +31,15 @@ public class TestController {
     @Autowired
     private TaxonomyService taxonomyService;
 
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
-    public String printWelcome(@PathVariable String name, ModelMap model) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET,produces="text/plain")
+    public @ResponseBody String printWelcome(@PathVariable int id) {
         
         Taxonomy taxonomy=new Taxonomy();
         taxonomy.setName("Java");
         taxonomy.setTaxonomyType(TaxonomyType.CATEGORY);
         
-        taxonomyService.save(taxonomy);
-       
-
-        model.addAttribute("message", taxonomy);
-        return "response";
+        taxonomyService.save(taxonomy);       
+        return taxonomy.toString();
     }
     
 }
