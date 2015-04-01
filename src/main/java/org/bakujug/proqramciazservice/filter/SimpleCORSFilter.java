@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author Administrator
+ * @author Ilkin Abdullayev
  */
 @Component
 public class SimpleCORSFilter implements Filter {
