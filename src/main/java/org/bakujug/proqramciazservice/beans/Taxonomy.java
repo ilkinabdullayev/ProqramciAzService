@@ -28,9 +28,6 @@ import org.bakujug.proqramciazservice.enums.TaxonomyType;
  *
  * @author Ilkin Abdullayev
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "taxonomy", namespace = "http://www.bakujug.org")
 @Table(name = "paz.PAZ_TAXONOMY")
 @Entity
 public class Taxonomy implements Serializable {
@@ -47,7 +44,7 @@ public class Taxonomy implements Serializable {
     @Column(name = "TAXONOMY_TYPE", nullable = false, length = 20)
     private TaxonomyType taxonomyType;
 
-    @ManyToMany(targetEntity = Post.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Post.class, fetch = FetchType.LAZY)
     @JoinTable(name = "paz.PAZ_TAXONOMY_RELATIONSHIPS",
             joinColumns = {
                 @JoinColumn(name = "TAX_ID", referencedColumnName = "ID")},

@@ -5,10 +5,13 @@
  */
 package org.bakujug.proqramciazservice.processing;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.bakujug.proqramciazservice.beans.Taxonomy;
 import org.bakujug.proqramciazservice.dao.TaxonomyService;
 import org.bakujug.proqramciazservice.enums.TaxonomyType;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,24 +29,38 @@ public class TaxonomyServiceImpl implements TaxonomyService {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Override    
+    @Override
     public void save(Taxonomy taxonomy) {
         getCurrentSession().save(taxonomy);
     }
 
     @Override
     public Taxonomy getTaxonomy(int id) {
-        return (Taxonomy) getCurrentSession().get(Taxonomy.class, id);
+        Taxonomy taxonomy = (Taxonomy) getCurrentSession().get(Taxonomy.class, id);
+        taxonomyInitialize(taxonomy);
+        return taxonomy;
     }
 
     @Override
     public List<Taxonomy> getListTaxonomy(TaxonomyType taxonomyType) {
-        return getCurrentSession().createCriteria(Taxonomy.class, "from Taxonomy t").list();
+        return getCurrentSession().createQuery("from Taxonomy t").list();
     }
 
     @Override
     public List<Taxonomy> getAllTaxonomy() {
-        return getCurrentSession().createCriteria(Taxonomy.class, "from Taxonomy t").list();       
+        List<Taxonomy> taxonomys = (List<Taxonomy>) getCurrentSession().createQuery("from Taxonomy t").list();
+        taxonomyListInitialize(taxonomys);
+        return taxonomys;
+    }
+
+    private void taxonomyListInitialize(List<Taxonomy> taxonomies) {       
+            for (Taxonomy tax : taxonomies) {
+                Hibernate.initialize(tax.getPosts());
+            }       
+    }
+    
+    private void taxonomyInitialize(Taxonomy taxonomy) {       
+            Hibernate.initialize(taxonomy.getPosts());       
     }
 
     private Session getCurrentSession() {

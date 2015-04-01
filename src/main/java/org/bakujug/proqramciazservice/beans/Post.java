@@ -21,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.bakujug.proqramciazservice.enums.PostStatus;
 import org.bakujug.proqramciazservice.enums.PostType;
+import org.codehaus.jackson.annotate.JsonBackReference;
 
 /**
  *
@@ -46,6 +47,8 @@ public class Post implements Serializable {
     @Column(name = "TITLE", nullable = false)
     private String title;
 
+    
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "PARENT_POST_ID", referencedColumnName = "ID")
     private Post parent;

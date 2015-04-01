@@ -44,8 +44,8 @@ public class User implements Serializable {
     private Date deRegistrationDate;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "USER_STATUS",nullable = false,length = 20)
-    private UserRoleType userStatus;
+    @Column(name = "USER_ROLE_TYPE",nullable = false,length = 20)
+    private UserRoleType userRoleType;
     
     @Column(name = "ACTIVE",nullable = false)
     private boolean active;
@@ -97,13 +97,13 @@ public class User implements Serializable {
         this.deRegistrationDate = deRegistrationDate;
     }
 
-    public UserRoleType getUserStatus() {
-        return userStatus;
+    public UserRoleType getUserRoleType() {
+        return userRoleType;
     }
 
-    public void setUserStatus(UserRoleType userStatus) {
-        this.userStatus = userStatus;
-    }
+    public void setUserRoleType(UserRoleType userRoleType) {
+        this.userRoleType = userRoleType;
+    }    
 
     public boolean isActive() {
         return active;
@@ -137,7 +137,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "nickname=" + nickname + ", userStatus=" + userStatus + ", active=" + active + '}';
+        return "User{" + "nickname=" + nickname + ", userRoleType=" + userRoleType + ", active=" + active + '}';
     }
  
 }
